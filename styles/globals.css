@@ -1,0 +1,7 @@
+a { cursor: pointer; }
+
+.btn-delete-user {
+    width: 40px;
+    text-align: center;
+    box-sizing: content-box;
+}
