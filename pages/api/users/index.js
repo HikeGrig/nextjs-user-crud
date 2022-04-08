@@ -13,12 +13,19 @@ function handler(req, res) {
     }
 
     function getUsers() {
-        const users = usersRepo.getAll();
-        return res.status(200).json(users);
+        if(req.query.query){
+            const users = usersRepo.search(req.query.query);
+            return res.status(200).json(users);
+        } else {
+            const users = usersRepo.getAll();
+            return res.status(200).json(users);
+        }
     }
     
     function createUser() {
         try {
+            return res.status(200).json(req.body);
+
             usersRepo.create(req.body);
             return res.status(200).json({});
         } catch (error) {

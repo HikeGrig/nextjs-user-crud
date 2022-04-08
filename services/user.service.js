@@ -3,6 +3,7 @@ import { fetchWrapper } from 'helpers';
 
 export const userService = {
     getAll,
+    search,
     getById,
     create,
     update,
@@ -13,6 +14,10 @@ const baseUrl = `${apiUrl}/users`;
 
 function getAll() {
     return fetchWrapper.get(baseUrl);
+}
+
+function search(query) {
+    return fetchWrapper.get(`${baseUrl}?query=${query}`);
 }
 
 function getById(id) {

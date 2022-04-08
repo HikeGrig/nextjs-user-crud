@@ -24,9 +24,9 @@ function AddEdit(props) {
             .email('Email is invalid')
             .required('Email is required'),
         address: Yup.string()
-            .required('Role is required'),
+            .required('Address is required'),
         number: Yup.number()
-            .required('Number is required'),
+            .required('Phone number is required'),
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -50,7 +50,7 @@ function AddEdit(props) {
         return userService.create(data)
             .then(() => {
                 alertService.success('User added', { keepAfterRouteChange: true });
-                router.push('.');
+                router.push('/');
             })
             .catch(alertService.error);
     }
@@ -59,7 +59,7 @@ function AddEdit(props) {
         return userService.update(id, data)
             .then(() => {
                 alertService.success('User updated', { keepAfterRouteChange: true });
-                router.push('..');
+                router.push('/');
             })
             .catch(alertService.error);
     }
