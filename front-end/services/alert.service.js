@@ -32,7 +32,8 @@ function success(message, options) {
 }
 
 function error(message, options) {
-    alert({ ...options, type: AlertType.Error, message });
+    console.log(options)
+    alert({ id: 'default-alert', type: AlertType.Error, message });
 }
 
 function info(message, options) {

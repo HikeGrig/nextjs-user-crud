@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'http://localhost:8000/api';
 
 export {
     apiUrl

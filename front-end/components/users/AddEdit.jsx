@@ -5,13 +5,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { Link } from 'components';
-import { userService, alertService } from 'services';
+import { userService } from 'services';
+import { useEffect } from 'react';
 
 export { AddEdit };
 
 function AddEdit(props) {
     const user = props?.user;
     const isAddMode = !user;
+    console.log(user)
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     
@@ -49,19 +51,23 @@ function AddEdit(props) {
     function createUser(data) {
         return userService.create(data)
             .then(() => {
-                alertService.success('User added', { keepAfterRouteChange: true });
                 router.push('/');
             })
-            .catch(alertService.error);
+            .catch((error)=>{
+                    alert('The email has already been taken.');
+                }
+            );
     }
 
     function updateUser(id, data) {
         return userService.update(id, data)
             .then(() => {
-                alertService.success('User updated', { keepAfterRouteChange: true });
                 router.push('/');
             })
-            .catch(alertService.error);
+            .catch((error)=>{
+                    alert('The email has already been taken.');
+                }
+            );
     }
 
     return (
@@ -97,8 +103,8 @@ function AddEdit(props) {
                 </div>
             </div>
             <div className="form-group">
-                <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary mr-2">
-                    {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                <button disabled={formState.isSubmitting} className="btn btn-primary">
+                    {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-2"></span>}
                     Save
                 </button>
             </div>
